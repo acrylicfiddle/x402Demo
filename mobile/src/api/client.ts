@@ -25,13 +25,13 @@ export async function getWithPayment<T>(path: string, walletKey?: string): Promi
 
       if (walletKey) {
         // Simulate paying: in production this signs a USDC transfer
-        // Use btoa instead of Buffer (not available in React Native without polyfill)
+        // JSON.stringify produces ASCII-safe output, so btoa() works directly
         const payload = JSON.stringify({
           scheme: 'exact',
           network: 'base-sepolia',
           payload: { mock: true, walletKey: walletKey.slice(0, 6) + '...' }
         });
-        const mockPaymentHeader = btoa(unescape(encodeURIComponent(payload)));
+        const mockPaymentHeader = btoa(payload);
 
         const paidResponse = await apiClient.get<T>(path, {
           headers: { 'X-PAYMENT': mockPaymentHeader }
