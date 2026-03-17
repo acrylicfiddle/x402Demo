@@ -11,6 +11,9 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4021;
 const PAYTO_ADDRESS = (process.env.SELLER_PAYTO || '0x0000000000000000000000000000000000000000') as `0x${string}`;
+if (!process.env.SELLER_PAYTO) {
+  console.warn('⚠️  SELLER_PAYTO not set — payments will go to zero address. Set this env var for production.');
+}
 const FACILITATOR_URL = process.env.FACILITATOR_URL || 'https://x402.org/facilitator';
 const NETWORK = (process.env.NETWORK_CAIP2 || 'eip155:84532') as `${string}:${string}`; // Base Sepolia
 

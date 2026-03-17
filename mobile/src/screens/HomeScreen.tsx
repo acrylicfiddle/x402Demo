@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { colors, spacing, borderRadius } from '../theme';
 import StatCard from '../components/StatCard';
-import { RootStackParamList } from '../types';
+import { MainTabParamList } from '../types';
 
-type Nav = NativeStackNavigationProp<RootStackParamList>;
+type Nav = BottomTabNavigationProp<MainTabParamList>;
 
 const recentRuns = [
   { date: 'Mon, Mar 17', type: 'Easy Run', distance: '6.2 km', duration: '38:24', pace: '6:12/km' },
@@ -41,7 +41,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Today's Workout Banner */}
-        <TouchableOpacity style={styles.todayCard} onPress={() => navigation.navigate('Main' as any)}>
+        <TouchableOpacity style={styles.todayCard} onPress={() => navigation.navigate('Plans')}>
           <View style={styles.todayBadge}>
             <Text style={styles.todayBadgeText}>TODAY</Text>
           </View>
@@ -91,7 +91,7 @@ export default function HomeScreen() {
         ))}
 
         {/* Browse Plans CTA */}
-        <TouchableOpacity style={styles.ctaCard} onPress={() => navigation.navigate('Main' as any)}>
+        <TouchableOpacity style={styles.ctaCard} onPress={() => navigation.navigate('Plans')}>
           <Text style={styles.ctaTitle}>🎯 Ready for a new challenge?</Text>
           <Text style={styles.ctaSubtitle}>Browse our premium training plans powered by x402 payments</Text>
           <Text style={styles.ctaLink}>View Plans →</Text>
